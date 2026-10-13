@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preload" as="image" href="img/fond-loup2.jpg">
+<link rel="preload" as="image" href="img/fond-test2.jpg">
+<link rel="preload" as="image" href="img/hero.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Immensité · Spectacle immersif jeune public · Ladylike Lily</title>
+<meta name="description" content="Mon Immensité : un spectacle immersif jeune public de Ladylike Lily. Une plongée sensorielle au cœur de l’enfance. Marionnette, musique live, théâtre d'ombres et magie nouvelle. Dès 5 ans · 45 min · Création 2028.">
+<meta property="og:title" content="Mon Immensité · Ladylike Lily">
+<meta property="og:description" content="Une plongée sensorielle au cœur de l’enfance. Spectacle immersif jeune public, dès 5 ans. Création 2028.">
+<meta property="og:image" content="img/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --nuit:#040c1a; --nuit2:#071a33; --bleu:#1f6fe0; --turq:#46d4e6; --glace:#cfeaff;
+  --texte:#dbe9f7; --doux:#8fa6bf; --ligne:rgba(160,205,255,.16);
+  --serif:'Playfair Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--nuit);color:var(--texte);font-family:var(--sans);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+em,i{font-style:italic}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.4rem}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.15;color:#fff;margin-bottom:1.2rem}
+h3{font-family:var(--serif);font-weight:600;color:#fff}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--turq);margin-bottom:.9rem}
+section{position:relative;padding:6.5rem 0}
+section.alt{background:linear-gradient(180deg,rgba(4,12,26,.9),rgba(4,12,26,.97)),url(img/fond-nuit.jpg) center/cover fixed}
+.lead{font-size:1.15rem;color:var(--texte)}
+.btn{display:inline-block;padding:.85rem 1.6rem;border-radius:999px;border:1px solid var(--turq);color:var(--turq);text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:.3px;transition:.25s;background:transparent;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--turq);color:var(--nuit)}
+.btn.plein{background:var(--turq);color:var(--nuit)}
+.btn.plein:hover{background:#fff;border-color:#fff}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.6rem;transition:.3s}
+nav.fond{background:rgba(4,12,26,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
+.logo{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:#fff;text-decoration:none}
+.menu{display:flex;gap:1.15rem;list-style:none}
+.menu a{text-decoration:none;font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--glace);opacity:.85}
+.menu a:hover{opacity:1;color:var(--turq)}
+.burger{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+@media(max-width:1180px){
+  .burger{display:block}
+  .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(4,12,26,.97);padding:.6rem 1.6rem 1.2rem}
+  .menu.ouvert{display:flex}
+  .menu li{padding:.55rem 0;border-bottom:1px solid var(--ligne)}
+}
+
+/* HERO = OUVERTURE : le titre reste en place, le reste apparaît autour */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:5rem 1.4rem max(7rem,26vh);background:#01040b}
+.hero .bg{will-change:transform,opacity;backface-visibility:hidden;position:absolute;inset:-6%;background-size:cover;background-position:center;opacity:0;transition:opacity 4s ease}
+.hero #bg1{background-image:url(img/fond-loup2.jpg);animation:vit1 19s ease-in-out infinite alternate}
+.hero #bg2{background-image:url(img/fond-test2.jpg);mix-blend-mode:screen;animation:vit2 23s ease-in-out infinite alternate}
+.hero #bg3,.hero #bg3f{inset:0;transform-origin:50% 100%;animation:respire3 34s ease-in-out infinite alternate;background-image:url(img/hero.jpg);background-size:contain;background-repeat:no-repeat;background-position:center bottom;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.hero #bg1.on{opacity:.62}
+.hero #bg2.on{opacity:.55}
+.hero #bg3.on{opacity:1}
+.hero #bg3f{background-image:url(img/hero-flou.jpg)}
+.hero #bg3f.on{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,rgba(1,4,11,.28),rgba(1,4,11,.1) 45%,rgba(1,4,11,.7) 100%),linear-gradient(180deg,transparent 78%,var(--nuit))}
+#points{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0;transition:opacity 4s ease}
+#points.on{opacity:1}
+.hero-in{position:relative;z-index:3;max-width:980px}
+.apres{opacity:0;transform:translateY(14px);transition:opacity 2.2s ease,transform 2.2s ease}
+.apres.on{opacity:1;transform:none}
+.eyebrow.apres{margin-bottom:1.4rem}
+.titre{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.7rem,9.6vw,8.2rem);line-height:1.05;color:#fff;white-space:nowrap;text-shadow:0 0 46px rgba(120,210,255,.5),0 2px 24px rgba(1,4,11,.85)}
+.titre .l{display:inline-block;opacity:0;will-change:transform,opacity,filter}
+.de{margin-top:-.25rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,4.6vw,3.3rem);line-height:1.1;color:var(--glace);text-shadow:0 0 30px rgba(120,210,255,.45),0 2px 18px rgba(1,4,11,.85)}
+.accroche{font-size:clamp(1.05rem,2.2vw,1.4rem);margin:1.6rem auto 1.4rem;max-width:620px;color:var(--glace)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2rem}
+.chips span{border:1px solid var(--ligne);border-radius:999px;padding:.3rem .95rem;font-size:.85rem;color:var(--glace);background:rgba(10,30,58,.45)}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
+.defile{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:3;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--doux)}
+@keyframes vit1{0%{transform:scale(1.04) translate3d(-2%,-1.2%,0)}100%{transform:scale(1.14) translate3d(2%,1.4%,0)}}
+@keyframes vit2{0%{transform:scale(1.12) translate3d(2.2%,1%,0)}100%{transform:scale(1.03) translate3d(-2%,-1.4%,0)}}
+@keyframes respire3{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes derive{from{transform:scale(1.02) translate(-1.5%,-1%)}to{transform:scale(1.12) translate(1.5%,1%)}}
+nav{opacity:0;transition:opacity 2s ease,background .3s}
+body:not(.intro) nav{opacity:1}
+body.intro{overflow:hidden}
+#lucioles{position:fixed;inset:0;width:100%;height:100%;z-index:300;pointer-events:none}
+
+/* PITCH */
+.pitch{display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:start}
+.pitch .grand{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,2.8vw,2.1rem);line-height:1.35;color:#fff;margin-bottom:1.6rem}
+.pitch p+p{margin-top:1.1rem}
+.synopsis p{font-size:1.02rem}
+.synopsis .fin{color:#fff;font-family:var(--serif);font-style:italic;font-size:1.2rem;margin-top:1.6rem}
+@media(max-width:860px){.pitch{grid-template-columns:1fr;gap:2.4rem}}
+.citation{padding:6rem 0;text-align:center;background:linear-gradient(180deg,var(--nuit),rgba(4,12,26,.55),var(--nuit)),url(img/fond-bleu.jpg) center/cover}
+.citation q{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,3.6vw,2.7rem);line-height:1.3;color:#fff;max-width:880px;margin:0 auto;quotes:"« " " »"}
+
+/* AXES */
+.axes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.6rem}
+.axe{border:1px solid var(--ligne);border-radius:18px;overflow:hidden;background:rgba(8,26,50,.55);transition:.3s}
+.axe:hover{transform:translateY(-6px);border-color:rgba(70,212,230,.5)}
+.axe img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.axe div{padding:1.4rem 1.4rem 1.7rem}
+.axe h3{font-size:1.35rem;margin-bottom:.5rem}
+.axe p{font-size:.96rem;color:var(--texte)}
+@media(max-width:860px){.axes{grid-template-columns:1fr}}
+
+/* TEASER */
+.cadre{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid var(--ligne);background:#02070f;margin-top:2rem}
+.cadre iframe,.cadre video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.attente{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:url(img/hero.jpg) center/cover;color:#fff}
+.attente::before{content:"";position:absolute;inset:0;background:rgba(4,12,26,.72)}
+.attente *{position:relative}
+.attente .play{width:74px;height:74px;border-radius:50%;border:1.5px solid var(--turq);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.6rem;color:var(--turq)}
+
+/* GALERIE */
+.galerie{columns:3;column-gap:1rem;margin-top:2.4rem}
+.galerie figure{break-inside:avoid;margin-bottom:1rem;border-radius:14px;overflow:hidden;position:relative;cursor:zoom-in;border:1px solid var(--ligne)}
+.galerie img{width:100%;transition:transform .6s}
+.galerie figure:hover img{transform:scale(1.05)}
+.galerie figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .9rem .7rem;background:linear-gradient(transparent,rgba(4,12,26,.85));font-size:.8rem;color:var(--glace);opacity:0;transition:.3s}
+.galerie figure:hover figcaption{opacity:1}
+@media(max-width:860px){.galerie{columns:2}}
+@media(max-width:520px){.galerie{columns:1}}
+.note{font-size:.85rem;color:var(--doux);margin-top:1.2rem}
+#lightbox{position:fixed;inset:0;z-index:100;background:rgba(2,6,14,.95);display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+#lightbox.on{display:flex}
+#lightbox img{max-height:90vh;max-width:92vw;border-radius:8px}
+
+/* SON */
+.pistes{margin-top:2rem;display:grid;gap:1rem}
+.piste{border:1px solid var(--ligne);border-radius:16px;padding:1.2rem 1.4rem;background:rgba(8,26,50,.55);display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.piste h3{font-size:1.1rem;flex:1 1 220px}
+.piste h3 small{display:block;font-family:var(--sans);font-weight:300;font-size:.82rem;color:var(--doux);margin-top:.15rem}
+.piste audio{flex:2 1 300px;width:100%;filter:invert(.9) hue-rotate(160deg)}
+.piste .vide{flex:2 1 300px;color:var(--doux);font-size:.9rem;font-style:italic}
+
+/* EQUIPE */
+.equipe{display:grid;grid-template-columns:repeat(2,1fr);gap:0 3rem;margin-top:2.4rem}
+.membre{padding:1.2rem 0;border-top:1px solid var(--ligne)}
+.membre h3{font-size:1.15rem}
+.membre .role{font-size:.78rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--turq);margin:.2rem 0 .4rem}
+.membre p{font-size:.93rem;color:var(--texte)}
+.groupe{grid-column:1/-1;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--doux);margin-top:1.4rem}
+@media(max-width:760px){.equipe{grid-template-columns:1fr}}
+
+/* CALENDRIER */
+.cal{margin-top:2.4rem;max-width:820px}
+.annee{font-family:var(--serif);font-size:1.6rem;color:#fff;margin:2rem 0 .6rem}
+.ligne{display:grid;grid-template-columns:170px 1fr;gap:1.2rem;padding:.8rem 0;border-top:1px solid var(--ligne)}
+.ligne b{font-weight:500;color:var(--turq)}
+.ligne.cle b,.ligne.cle span{color:#fff}
+.ligne.cle{background:linear-gradient(90deg,rgba(70,212,230,.1),transparent);padding-left:.8rem;border-left:2px solid var(--turq)}
+.coprod{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.coprod span{border:1px solid var(--ligne);border-radius:999px;padding:.35rem 1rem;font-size:.9rem;background:rgba(8,26,50,.55)}
+.coprod span.ok{border-color:rgba(70,212,230,.5);color:#fff}
+@media(max-width:600px){.ligne{grid-template-columns:1fr;gap:.2rem}}
+
+/* TECHNIQUE */
+.fiche{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.2rem}
+.fiche div{border:1px solid var(--ligne);border-radius:14px;padding:1.1rem 1.3rem;background:rgba(8,26,50,.55)}
+.fiche small{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--turq);margin-bottom:.3rem}
+.fiche p{color:#fff;font-size:1rem}
+@media(max-width:860px){.fiche{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.fiche{grid-template-columns:1fr}}
+
+/* CONTACT */
+.contacts{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.4rem}
+.contact{border:1px solid var(--ligne);border-radius:16px;padding:1.4rem;background:rgba(8,26,50,.55)}
+.contact small{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--turq)}
+.contact h3{font-size:1.1rem;margin:.3rem 0 .6rem}
+.contact a{display:block;font-size:.92rem;text-decoration:none;color:var(--texte);word-break:break-all}
+.contact a:hover{color:var(--turq)}
+@media(max-width:980px){.contacts{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.contacts{grid-template-columns:1fr}}
+.dl{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
+.reseaux{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:center;margin:1.4rem 0 1.6rem}
+.reseaux a{font-size:.82rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--glace);padding:.2rem 0;border-bottom:1px solid transparent;transition:.25s}
+.reseaux a:hover{color:var(--turq);border-color:var(--turq)}
+footer{padding:3rem 0 3.4rem;border-top:1px solid var(--ligne);text-align:center;color:var(--doux);font-size:.88rem}
+footer a{color:var(--glace)}
+
+
+/* ATELIERS & EXPOSITION */
+.ateliers{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:2.4rem}
+.atelier{border:1px solid var(--ligne);border-radius:18px;padding:1.6rem 1.6rem 1.8rem;background:rgba(8,26,50,.55);transition:.3s}
+.atelier:hover{border-color:rgba(70,212,230,.5);transform:translateY(-4px)}
+.atelier small{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--turq)}
+.atelier h3{font-size:1.35rem;margin:.35rem 0 .6rem}
+.atelier p{font-size:.97rem}
+@media(max-width:760px){.ateliers{grid-template-columns:1fr}}
+.expo{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;margin-top:2.4rem}
+.expo-img{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.expo-img img{width:100%;height:100%;object-fit:cover;border-radius:14px;border:1px solid var(--ligne);aspect-ratio:3/4}
+.expo-img img:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.expo .lieu{display:inline-block;margin:.4rem 0 1rem;border:1px solid var(--ligne);border-radius:999px;padding:.3rem 1rem;font-size:.9rem;color:var(--glace);background:rgba(10,30,58,.45)}
+.expo h3{font-size:clamp(2rem,4vw,3rem);font-style:italic;font-weight:400;margin-bottom:.4rem}
+@media(max-width:860px){.expo{grid-template-columns:1fr;gap:2rem}}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s,transform 1s}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.hero .bg{animation:none}*{animation-duration:.01s!important}}
+</style>
+</head>
+<body class="intro">
+
+<nav id="nav">
+  <a class="logo" href="#haut">Mon immensité</a>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <ul class="menu" id="menu">
+    <li><a href="#spectacle">Le spectacle</a></li>
+    <li><a href="#axes">Les trois axes</a></li>
+    <li><a href="#univers">Univers</a></li>
+    <li><a href="#teaser">Teaser</a></li>
+    <li><a href="#son">Son</a></li>
+    <li><a href="#equipe">Équipe</a></li>
+    <li><a href="#ateliers">Ateliers</a></li>
+    <li><a href="#exposition">Exposition</a></li>
+    <li><a href="#calendrier">Calendrier</a></li>
+    <li><a href="#technique">Fiche technique</a></li>
+    <li><a href="#programmer">Programmer</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="haut">
+  <div class="bg" id="bg1"></div><div class="bg" id="bg2"></div><div class="bg" id="bg3"></div><div class="bg" id="bg3f"></div>
+  <canvas id="points"></canvas>
+  <div class="hero-in">
+    <p class="eyebrow apres">Spectacle immersif jeune public</p>
+    <h1 class="titre" id="titre" aria-label="Mon immensité"></h1>
+    <p class="de apres" id="de">de Ladylike Lily</p>
+    <p class="accroche apres">Une plongée sensorielle au cœur de l’enfance.</p>
+    <div class="chips apres">
+      <span>Dès 5 ans</span><span>45 minutes</span><span>Jauge idéale 350</span><span>3 personnes en tournée</span><span>Création 2028</span>
+    </div>
+    <div class="cta apres">
+      <a class="btn plein" href="#teaser">Voir le teaser</a>
+      <a class="btn" href="Mon-immensite-dossier-de-presentation.pdf" download>Télécharger le dossier</a>
+      <a class="btn" href="#programmer">Programmer le spectacle</a>
+    </div>
+  </div>
+  <div class="defile apres">Faire défiler</div>
+</header>
+
+<section id="spectacle">
+  <div class="wrap pitch">
+    <div class="rv">
+      <p class="eyebrow">Le spectacle</p>
+      <p class="grand">Lily ressent tout intensément. Face à un monde parfois trop grand et trop bruyant, elle invente un refuge : un monde intérieur immense, fait de papier découpé, d'ombres et de musique.</p>
+      <p>Sur scène, l'enfant et l'adulte se cherchent et se retrouvent, entre musique live, marionnette, théâtre d'ombres et magie nouvelle. Une traversée sensorielle de l'enfance, où l'imaginaire devient un territoire de liberté.</p>
+      <p style="margin-top:1.6rem"><a class="btn" href="#teaser">Voir le teaser</a></p>
+    </div>
+    <div class="synopsis rv">
+      <p class="eyebrow">Synopsis</p>
+      <p>Lily ressent tout intensément. Dans la cour de récréation, le monde est trop grand, trop rapide, trop bruyant : elle peine à y trouver sa place.</p>
+      <p>Alors elle invente un refuge, un monde intérieur de papier et d'ombres. Avec deux pouvoirs seulement, découper et chanter, elle transforme ce qui l'effraie.</p>
+      <p>Sur scène, deux Lily se rencontrent : l'enfant, une marionnette, et l'adulte. Elles se cherchent, se séparent, se retrouvent.</p>
+      <p class="fin">Et si ce monde intérieur, longtemps perçu comme un refuge, devenait finalement une force pour grandir et trouver sa place parmi les autres ?</p>
+    </div>
+  </div>
+</section>
+
+<section id="axes" class="alt">
+  <div class="wrap">
+    <p class="eyebrow rv">Les trois axes</p>
+    <h2 class="rv">Une écriture au plateau,<br>trois matières qui se répondent</h2>
+    <div class="axes">
+      <article class="axe rv">
+        <img src="img/loup-ombre.jpg" alt="Ombre de Lily face à un loup de papier découpé, sur un voile bleu" loading="lazy">
+        <div><h3>La marionnette</h3><p>Après deux spectacles en papier découpé et en ombre, Ladylike Lily mêle la 2D et la 3D : une marionnette en volume, manipulée à vue, évolue au milieu des images et des ombres. Un même visage change d’expression, de présence ou d’âge selon la manière dont il est manipulé, éclairé ou traversé par l’image.</p></div>
+      </article>
+      <article class="axe rv">
+        <img src="img/lumiere.jpg" alt="Une citadelle de papier traversée d'un faisceau de lumière" loading="lazy">
+        <div><h3>La magie nouvelle</h3><p>Avec Étienne Saglio comme regard extérieur, apparitions, disparitions et métamorphoses sortent du papier, de l'ombre ou du voile pour faire basculer le réel. La magie n'est pas une suite d'effets, mais un outil dramaturgique.</p></div>
+      </article>
+      <article class="axe rv">
+        <img src="img/ok-musique.jpg" alt="Main sur le clavier, éclairée de points lumineux" loading="lazy">
+        <div><h3>La musique et l'image</h3><p>La musique est jouée et fabriquée à vue : boucles, synthétiseurs, guitare et voix traduisent la saturation perceptive de Lily. La vidéo reste rare et ciblée, le reste se construit avec la lumière, le papier et la manipulation.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="univers" class="alt">
+  <div class="wrap">
+    <p class="eyebrow rv">Univers visuel</p>
+    <h2 class="rv">Portraits, fonds et décors</h2>
+    <p class="lead rv" style="max-width:640px">Une citadelle de papier, des ombres, des fonds de lumière : le monde intérieur de Lily se construit sous les yeux du public, du bleu saturé du début vers un monde de couleurs.</p>
+    <div class="galerie" id="galerie">
+      <figure class="rv"><img src="img/portrait.jpg" alt="Portrait de Ladylike Lily dans la projection" loading="lazy"><figcaption>Ladylike Lily · portrait officiel</figcaption></figure>
+      <figure class="rv"><img src="img/marionnette-3d.jpg" alt="La marionnette de Lily en volume, manipulée à vue" loading="lazy"><figcaption>La marionnette en volume</figcaption></figure>
+      <figure class="rv"><img src="img/ok-residence-marionnette.jpg" alt="La marionnette, manipulée à vue" loading="lazy"><figcaption>Résidence · la marionnette</figcaption></figure>
+      <figure class="rv"><img src="img/citadelle-1.jpg" alt="Citadelle lumineuse en papier" loading="lazy"><figcaption>La citadelle lumineuse</figcaption></figure>
+      <figure class="rv"><img src="img/ok-decor5.jpg" alt="La marionnette devant les ombres d'une ville de papier" loading="lazy"><figcaption>La marionnette et les ombres de la ville</figcaption></figure>
+      <figure class="rv"><img src="img/fond-nuit.jpg" alt="Fond de points lumineux" loading="lazy"><figcaption>Fond · monde intérieur saturé</figcaption></figure>
+      <figure class="rv"><img src="img/ok-loup.jpg" alt="La marionnette et un loup de papier découpé" loading="lazy"><figcaption>Le loup de papier découpé</figcaption></figure>
+      <figure class="rv"><img src="img/citadelle-2.jpg" alt="Citadelle de papier, détail" loading="lazy"><figcaption>Citadelle · détail</figcaption></figure>
+      <figure class="rv"><img src="img/ok-musique.jpg" alt="Main sur le clavier" loading="lazy"><figcaption>Musique · le clavier sous la projection</figcaption></figure>
+      <figure class="rv"><img src="img/ville.jpg" alt="Ville de papier découpé" loading="lazy"><figcaption>Ville de papier découpé</figcaption></figure>
+      <figure class="rv"><img src="img/lumiere.jpg" alt="Citadelle dans un faisceau de lumière" loading="lazy"><figcaption>La citadelle dans la lumière</figcaption></figure>
+      <figure class="rv"><img src="img/fond-bleu.jpg" alt="Fond bleu de tissu" loading="lazy"><figcaption>Fond · bleu saturé</figcaption></figure>
+      <figure class="rv"><img src="img/citadelle-3.jpg" alt="Citadelle de papier, ombres" loading="lazy"><figcaption>Citadelle · ombres portées</figcaption></figure>
+      <figure class="rv"><img src="img/champignons.jpg" alt="Points lumineux et champignons" loading="lazy"><figcaption>Recherche · points et champignons</figcaption></figure>
+      <figure class="rv"><img src="img/citadelle-4.jpg" alt="Citadelle de papier" loading="lazy"><figcaption>Citadelle</figcaption></figure>
+      <figure class="rv"><img src="img/fond-carre.jpg" alt="Fond de points lumineux, carré" loading="lazy"><figcaption>Fond · tunnel de lumière</figcaption></figure>
+      <figure class="rv"><img src="img/citadelle-5.jpg" alt="Citadelle de papier, gros plan" loading="lazy"><figcaption>Citadelle · gros plan</figcaption></figure>
+    </div>
+    <p class="note">© Orianne Marsilli, © Julien Ravary</p>
+  </div>
+</section>
+
+<section id="teaser">
+  <div class="wrap">
+    <p class="eyebrow rv">Teaser</p>
+    <h2 class="rv">Entrer dans le monde de Lily</h2>
+    <div class="cadre rv" id="cadreTeaser"></div>
+  </div>
+</section>
+
+<section id="son">
+  <div class="wrap">
+    <p class="eyebrow rv">Écouter</p>
+    <h2 class="rv">Le son de la création en cours</h2>
+    <p class="lead rv" style="max-width:640px">Extraits de la bande originale en construction. Synthétiseurs, pédales de boucles, voix et guitare : le son se superpose, se brouille, puis s'ouvre à mesure que Lily accède à son immensité.</p>
+    <div class="pistes" id="pistes"></div>
+  </div>
+</section>
+
+<section id="equipe" class="alt">
+  <div class="wrap">
+    <p class="eyebrow rv">L'équipe</p>
+    <h2 class="rv">L’équipe artistique</h2>
+    <div class="equipe rv">
+      <p class="groupe">Équipe en tournée</p>
+      <div class="membre"><h3>Orianne Marsilli · Ladylike Lily</h3><p class="role">Co-mise en scène, écriture, musique, jeu, marionnette, papier et vidéo</p><p>Musicienne, autrice-compositrice et artiste plasticienne. Plus de 300 concerts en France et à l'international, et des créations jeune public depuis 2019.</p></div>
+      <div class="membre"><h3>Julien Ravary</h3><p class="role">Manipulation décor, marionnette d'ombre, régie lumière</p><p>Ingénieur du son et régisseur technique depuis plus de vingt ans. Fondateur de Red House Acoustics.</p></div>
+      <div class="membre"><h3>Kim Dutour</h3><p class="role">Jeu et construction marionnette</p><p>Marionnettiste, créatrice et intervenante, fondatrice de la compagnie MaeBee (Côtes-d'Armor). Formée à la marionnette à fil en Espagne.</p></div>
+      <p class="groupe">Équipe artistique</p>
+      <div class="membre"><h3>David Lippe</h3><p class="role">Co-mise en scène et accompagnement marionnette</p><p>Marionnettiste diplômé de l'ESNAM, interprète et metteur en scène. Collaborations sur <em>Echoes</em> (2018) et <em>Les Graines oubliées</em> (2023).</p></div>
+      <div class="membre"><h3>Étienne Saglio</h3><p class="role">Regard extérieur, magie nouvelle</p><p>Artiste de théâtre visuel et de magie nouvelle, formé au CNAC. Auteur associé au Théâtre du Rond-Point (2017-2022).</p></div>
+      <div class="membre"><h3>Alma Terrasse</h3><p class="role">Dramaturgie</p><p>Metteuse en scène et autrice, entre théâtre musical et opéra. Recherche autour de l'altérité, du corps et de la perception de soi.</p></div>
+      <div class="membre"><h3>Anna Le Reun</h3><p class="role">Création costumes</p><p>Costumière pour la Compagnie Monstre(s) et le Cabaret Moustache. Des costumes pensés pour le mouvement, la transformation et la scène.</p></div>
+      <div class="membre"><h3>Ronan Ménard</h3><p class="role">Scénographie et construction</p><p>Scénographe et constructeur de décors pour le spectacle vivant, notamment pour la Cie Poc. Il construit à l'atelier mutualisé Côté Décors, à Plédéliac (22).</p></div>
+      <div class="membre"><h3>Philippe Saumont</h3><p class="role">Regard extérieur marionnette</p><p>Directeur artistique du Festival Marionnet'IC à Saint-Brieuc. Accompagnement à la construction et à la dramaturgie marionnettique.</p></div>
+      <div class="membre"><h3>Christophe Miossec</h3><p class="role">Voix du Loup</p><p>Auteur-compositeur-interprète brestois, figure de la nouvelle scène française depuis l'album <em>Boire</em> (1995).</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ateliers" class="alt">
+  <div class="wrap">
+    <p class="eyebrow rv">Médiation</p>
+    <h2 class="rv">Ateliers</h2>
+    <p class="lead rv" style="max-width:700px">Les ateliers prolongent le spectacle par la pratique. On y fabrique d’abord sa marionnette d’ombre en papier découpé, puis on la fait vivre en petites saynètes devant un fond vidéoprojeté, comme dans le spectacle : l’ombre sur l’écran, la lumière qui change, l’image qui se transforme.</p>
+    <div class="galerie" id="galerieAteliers">
+      <figure class="rv"><img src="img/atelier-loups.jpg" alt="Découpe d’une marionnette d’ombre en papier" loading="lazy"><figcaption>Fabrication · la marionnette d’ombre en papier</figcaption></figure>
+      <figure class="rv"><img src="img/atelier-oiseau.jpg" alt="Un enfant manipule un oiseau de papier devant la lumière" loading="lazy"><figcaption>Manipuler son ombre</figcaption></figure>
+      <figure class="rv"><img src="img/atelier-1.jpg" alt="Marionnette d’ombre devant un fond vidéoprojeté" loading="lazy"><figcaption>Saynète sur fond vidéoprojeté</figcaption></figure>
+      <figure class="rv"><img src="img/atelier-2.jpg" alt="Enfants et marionnettes d’ombre devant l’écran" loading="lazy"><figcaption>Les saynètes</figcaption></figure>
+      <figure class="rv"><img src="img/atelier-3.jpg" alt="Un enfant devant l’ombre d’un loup" loading="lazy"><figcaption>Face à l’ombre</figcaption></figure>
+      <figure class="rv"><img src="img/atelier-4.jpg" alt="Citadelle de papier et petit animal" loading="lazy"><figcaption>Citadelle de papier</figcaption></figure>
+    </div>
+    <p class="note rv">Atelier d’ombre · parcours sensoriel sonore · atelier plastique, citadelle lumineuse · cabane à rêves. Durées, âges et jauges à préciser avec chaque lieu d’accueil. <a href="#programmer" style="color:var(--turq)">Nous contacter</a></p>
+  </div>
+</section>
+
+<section id="exposition">
+  <div class="wrap" style="max-width:1200px">
+    <p class="eyebrow rv">Exposition</p>
+    <h2 class="rv">Refuges</h2>
+    <div class="rv" style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center;margin-top:1.4rem" id="expoGrille">
+      <figure><img id="refuges" src="img/refuges-affiche.jpg" alt="Refuges, exposition de Ladylike Lily : œuvres de papiers, lumières, sons et ombres" style="width:100%;border-radius:16px;border:1px solid var(--ligne);cursor:zoom-in"></figure>
+      <div>
+        <p style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;margin-bottom:.2rem">Exposition de Ladylike Lily</p>
+        <p style="font-style:italic;color:var(--turq);margin-bottom:1.4rem">œuvres de papiers, lumières, sons et ombres</p>
+        <p style="font-style:italic;margin-bottom:1.1rem">Où va-t-on quand le monde devient trop grand, trop bruyant, trop intense ?</p>
+        <p style="margin-bottom:1.1rem">Certains se construisent une cabane. D’autres inventent un monde entier. Certains dessinent, rêvent, écoutent une chanson en boucle ou trouvent un endroit où, enfin, tout s’apaise.</p>
+        <p style="margin-bottom:1.1rem">Pour « Refuges », enfants et adultes ont raconté ces endroits secrets. Ils les ont dessinés, décrits, parfois confiés par quelques mots ou par une musique.</p>
+        <p style="margin-bottom:1.1rem">De toutes ces histoires est né un paysage de papier et de lumière : une ville imaginaire peuplée de tours, d’arbres et de refuges, traversée par des voix, des souvenirs et des morceaux de musique.</p>
+        <p style="margin-bottom:1.1rem">Et le paysage n’est peut-être pas tout à fait terminé… Si vous pouviez y ajouter quelque chose, où serait votre refuge ?</p>
+        <p>« Refuges » prolonge l’univers de <em>Mon Immensité</em> et en dévoile les premières recherches scénographiques.</p>
+      </div>
+    </div>
+    <figure class="rv" style="margin-top:clamp(1.5rem,3vw,2.5rem)"><img src="img/refuges-detail.jpg" alt="Refuges, détail des tours de papier découpé et éclairé" loading="lazy" style="width:100%;max-height:420px;object-fit:cover;border-radius:16px;border:1px solid var(--ligne)"></figure>
+    <p class="rv" style="margin-top:1.6rem;text-align:center"><a class="btn" href="#programmer">Accueillir l’exposition</a></p>
+  </div>
+</section>
+<style>@media(max-width:820px){#expoGrille{grid-template-columns:1fr!important}}</style>
+
+<section id="calendrier">
+  <div class="wrap">
+    <p class="eyebrow rv">Création 2026–2028</p>
+    <h2 class="rv">Calendrier de résidence</h2>
+    <div class="coprod rv">
+      <span class="ok">Théâtre Ducourneau, Agen · coproducteur · pré-achat</span>
+      <span class="ok">Le Safran, Amiens · coproducteur · pré-achat</span>
+      <span class="ok">TCM, Charleville-Mézières · coproducteur</span>
+      <span>Théâtre d'Épernay · potentiel</span>
+      <span>Théâtre Comœdia, Marmande · potentiel</span>
+      <span>Théâtre Olympe de Gouges, Montauban · potentiel</span>
+    </div>
+    <div class="cal rv">
+      <p class="annee">2026</p>
+      <div class="ligne"><b>Sept.–oct.</b><span>Ouverture des pré-achats · Théâtre Ducourneau (Agen) et Le Safran (Amiens) ont déjà pré-acheté le spectacle</span></div>
+      <div class="ligne"><b>Novembre</b><span>Construction de la marionnette avec Kim Dutour</span></div>
+      <p class="annee">2027</p>
+      <div class="ligne"><b>Janvier–mars</b><span>Trois temps de création avec les familles à la médiathèque d'Yffiniac</span></div>
+      <div class="ligne"><b>Février</b><span>Résidence d'une semaine au plateau, en Bretagne</span></div>
+      <div class="ligne"><b>10–25 avril</b><span>Résidence au Théâtre Ducourneau, Agen, avec rencontre publique autour du 21 avril</span></div>
+      <div class="ligne"><b>Juin</b><span>Résidence d'une semaine, en Bretagne</span></div>
+      <div class="ligne"><b>Septembre</b><span>Résidence au Safran, Amiens</span></div>
+      <div class="ligne"><b>Novembre</b><span>Résidence · Exposition « Refuges », médiathèque d'Yffiniac</span></div>
+      <p class="annee">2028</p>
+      <div class="ligne"><b>24–26 janvier</b><span>Résidence de répétitions au TCM, Charleville-Mézières</span></div>
+      <div class="ligne cle"><b>28–29 janvier</b><span>Création de « Mon Immensité » au TCM, Charleville-Mézières</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="technique" class="alt">
+  <div class="wrap">
+    <p class="eyebrow rv">Fiche technique</p>
+    <h2 class="rv">En tournée</h2>
+    <p class="lead rv" style="max-width:640px">Informations essentielles. La fiche technique complète sera précisée au fil des résidences.</p>
+    <div class="fiche rv">
+      <div><small>Durée</small><p>45 minutes</p></div>
+      <div><small>Public</small><p>À partir de 5 ans</p></div>
+      <div><small>Jauge idéale</small><p>350 spectateurs</p></div>
+      <div><small>En tournée</small><p>3 personnes</p></div>
+      <div><small>Régie</small><p>Dispositif centralisé sous QLab : lumière, son, image</p></div>
+      <div><small>Création</small><p>Janvier 2028 · TCM, Charleville-Mézières</p></div>
+    </div>
+    <div class="dl rv">
+      <a class="btn plein" href="fiche-technique-mon-immensite.pdf" id="lienFiche">Fiche technique (PDF)</a>
+      <a class="btn" href="Mon-immensite-dossier-de-presentation.pdf" download>Dossier de présentation (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section id="programmer">
+  <div class="wrap">
+    <p class="eyebrow rv">Programmer le spectacle</p>
+    <h2 class="rv">Parlons-en</h2>
+    <div class="contacts rv">
+      <div class="contact"><small>Diffusion</small><h3>Marion Long</h3><p style="font-size:.88rem;color:var(--doux);margin-bottom:.5rem">Un Deux Un Deux</p><a href="mailto:marion@undeuxundeux.com">marion@undeuxundeux.com</a><a href="tel:+33630485506">06 30 48 55 06</a></div>
+      <div class="contact"><small>Production &amp; administration</small><h3>Caroline Coudert</h3><p style="font-size:.88rem;color:var(--doux);margin-bottom:.5rem">OUCH PROD</p><a href="mailto:caroline.ouchprod@gmail.com">caroline.ouchprod@gmail.com</a><a href="tel:+33618593556">06 18 59 35 56</a></div>
+      <div class="contact"><small>Artistique</small><h3>Orianne Marsilli</h3><p style="font-size:.88rem;color:var(--doux);margin-bottom:.5rem">Ladylike Lily</p><a href="mailto:ladylikelily@gmail.com">ladylikelily@gmail.com</a><a href="tel:+33650766370">06 50 76 63 70</a></div>
+      <div class="contact"><small>Technique</small><h3>Julien Ravary</h3><p style="font-size:.88rem;color:var(--doux);margin-bottom:.5rem">Régie</p><a href="mailto:julien.ravary@gmail.com">julien.ravary@gmail.com</a><a href="tel:+33671593816">06 71 59 38 16</a></div>
+    </div>
+    <div class="dl rv">
+      <a class="btn plein" href="Mon-immensite-dossier-de-presentation.pdf" download>Télécharger le dossier</a>
+      <a class="btn" href="#teaser">Revoir le teaser</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="reseaux" id="reseaux"></div>
+    <p><strong style="color:#fff">OUCH PROD</strong> · 18 rue des Lilas, 22960 Plédran</p>
+    <p style="margin:.4rem 0"><a href="https://www.ouchprod.com">ouchprod.com</a> · <a href="https://instagram.com/ouch.prod">Instagram</a> · <a href="https://facebook.com/ouchprodasso">Facebook</a></p>
+    <p>Mon Immensité · Ladylike Lily · Création 2028</p>
+  </div>
+</footer>
+
+<canvas id="lucioles" aria-hidden="true"></canvas>
+<div id="lightbox"><img alt=""></div>
+
+<script>
+/* ───── À COMPLÉTER ─────
+   TEASER : colle ici l'adresse d'intégration YouTube ou Vimeo, ou le nom d'un fichier mp4 du dossier.
+   Exemples :  "https://www.youtube.com/embed/XXXXXXXXXXX"   "https://player.vimeo.com/video/XXXXXXXX"   "teaser.mp4"
+   Laisse "" tant que le teaser n'est pas prêt. */
+const TEASER = "https://www.youtube.com/embed/dzT9AUN7tzw";
+
+/* SON : ajoute tes extraits (fichiers mp3 posés dans le même dossier que ce fichier). */
+const PISTES = [
+  /* { titre:"Brouillard", note:"Extrait de la création en cours · automne 2026", src:"son/brouillard.mp3" }, */
+];
+/* ─────────────────────── */
+
+// Teaser
+(function(){
+  const c=document.getElementById('cadreTeaser');
+  if(!TEASER){
+    c.innerHTML='<div class="attente"><div class="play">▶</div><h3>Le teaser arrive</h3><p style="color:var(--glace);margin-top:.3rem">Pour le recevoir en avant-première, écrivez à la diffusion.</p><p style="margin-top:1rem"><a class="btn" href="#programmer">Contacter la diffusion</a></p></div>';
+  } else if(/\.(mp4|webm)$/i.test(TEASER)){
+    c.innerHTML='<video src="'+TEASER+'" controls playsinline></video>';
+  } else {
+    c.innerHTML='<iframe src="'+TEASER+'" title="Teaser Mon Immensité" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+  }
+})();
+
+// Son
+(function(){
+  const box=document.getElementById('pistes');
+  if(!PISTES.length){
+    box.innerHTML='<div class="piste"><h3>Extraits sonores<small>Création en cours</small></h3><p class="vide">Les premiers extraits arrivent. En attendant, le dossier de présentation décrit la matière sonore du spectacle.</p></div>';
+    return;
+  }
+  box.innerHTML=PISTES.map(p=>'<div class="piste"><h3>'+p.titre+'<small>'+(p.note||'')+'</small></h3><audio controls preload="none" src="'+p.src+'"></audio></div>').join('');
+})();
+
+// Fiche technique : si le PDF n'existe pas encore, le bouton mène à la section contact
+(function(){
+  fetch('fiche-technique-mon-immensite.pdf',{method:'HEAD'}).then(r=>{
+    if(!r.ok){const a=document.getElementById('lienFiche');a.setAttribute('href','#programmer');a.textContent='Demander la fiche technique complète';}
+  }).catch(()=>{const a=document.getElementById('lienFiche');a.setAttribute('href','#programmer');a.textContent='Demander la fiche technique complète';});
+})();
+
+// Ouverture : fond loup → fond Test 2 → musicienne ; puis les lettres, en désordre, s'assemblent. Le titre reste en place, le reste apparaît autour.
+(function(){
+  const $=id=>document.getElementById(id);
+  const titre=$('titre'),de=$('de'),pts=$('points');
+  let deja=false; try{deja=sessionStorage.getItem('mi-intro')==='1'}catch(e){}
+  const reduit=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const R=n=>(Math.random()*2-1)*n;
+  const L=[];
+  for(const c of 'Mon immensité'){
+    const el=document.createElement('span');el.className='l';el.textContent=c===' '?'\u00a0':c;titre.appendChild(el);
+    L.push({el,x:R(44),y:R(40),rot:R(200),sc:.4+Math.random()*1.9,fx:.3+Math.random()*.7,fy:.3+Math.random()*.7,ph:Math.random()*6.28,ap:Math.random()*1500,go:0});
+  }
+  let fini=false;
+  const apres=[...document.querySelectorAll('.apres')].filter(e=>e!==de);
+  function final(instant){
+    if(fini)return;fini=true;
+    ['bg1','bg2','bg3','bg3f'].forEach(i=>$(i).classList.add('on'));pts.classList.add('on');
+    for(const l of L){l.el.style.transition='';l.el.style.opacity='1';l.el.style.filter='none';l.el.style.transform='none'}
+    de.classList.add('on');
+    apres.forEach((e,k)=>{e.style.transitionDelay=instant?'0s':(k*.35)+'s';e.classList.add('on')});
+    document.body.classList.remove('intro');
+    try{sessionStorage.setItem('mi-intro','1')}catch(e){}
+  }
+  if(deja||reduit){
+    // pas d'animation : tout est en place d'emblée
+    $('bg1').style.transition=$('bg2').style.transition=$('bg3').style.transition=$('bg3f').style.transition=pts.style.transition='none';
+    document.querySelectorAll('.apres').forEach(e=>e.style.transition='none');
+    final(true);return;
+  }
+  const t0=performance.now();
+  const B2=1400,B3=6500,DEBUT=3200,RASSEMBLE=7000,DUREE=4600;
+  $('bg1').classList.add('on');
+  setTimeout(()=>{if(!fini){$('bg2').classList.add('on')}},B2);
+  setTimeout(()=>{if(!fini)pts.classList.add('on')},B2+1500);
+  setTimeout(()=>{if(!fini)$('bg3').classList.add('on')},B3);
+    L.forEach(l=>{l.go=RASSEMBLE+Math.random()*450});   // toutes les lettres partent ensemble, à peine décalées : aucune n'arrive avant les autres
+  const ease=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;   // départ et arrivée en douceur, mouvement continu entre les deux
+  function frame(now){
+    if(fini)return;
+    const tt=now-t0;
+    for(const l of L){
+      let u=Math.max(0,Math.min(1,(tt-l.go)/DUREE));u=ease(u);
+      const dx=(l.x+Math.sin(tt/1000*l.fx+l.ph)*9)*(1-u),dy=(l.y+Math.cos(tt/1100*l.fy+l.ph)*8)*(1-u);
+      const rot=(l.rot+Math.sin(tt/1300*l.fx+l.ph)*25)*(1-u),sc=1+(l.sc-1)*(1-u);
+      const vis=Math.max(0,Math.min(1,(tt-DEBUT-l.ap)/1200));
+      l.el.style.opacity=(vis*(.55+.45*u)).toFixed(3);
+      l.el.style.filter='blur('+(9*(1-u)).toFixed(1)+'px)';
+      l.el.style.transform='translate('+dx.toFixed(2)+'vw,'+dy.toFixed(2)+'vh) rotate('+rot.toFixed(1)+'deg) scale('+sc.toFixed(3)+')';
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  const fin1=RASSEMBLE+450+DUREE;
+  setTimeout(()=>{if(!fini){de.classList.add('on')}},fin1-500);
+  setTimeout(()=>final(false),fin1+900);
+  // un clic ou une touche passe directement à la page
+  $('haut').addEventListener('click',()=>final(true));
+  addEventListener('keydown',()=>final(true),{once:true});
+})();
+
+// Halos et neige bleue douce qui suivent la souris (aucune bulle : seulement des halos en camaïeu de bleus)
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cv=document.getElementById('lucioles'),cx=cv.getContext('2d');
+  let W,H,dpr=Math.min(devicePixelRatio||1,1.5);
+  function taille(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+  taille();addEventListener('resize',taille);
+  const cols=[[205,232,255],[130,195,255],[80,160,245],[60,120,225],[90,205,235],[170,215,255]];
+  const mouse={x:W/2,y:H/2,px:W/2,py:H/2,actif:false,t:0};
+  const flocons=[];
+  const suiv=Array.from({length:4},(_,i)=>({x:W/2,y:H/2,k:.014+i*.008,ph:Math.random()*6.28,r:2.4+Math.random()*2.4,c:cols[i%cols.length],ang:Math.random()*6.28,rayon:14+Math.random()*38}));
+  function bouge(x,y){
+    mouse.x=x;mouse.y=y;mouse.actif=true;mouse.t=performance.now();
+    const d=Math.hypot(x-mouse.px,y-mouse.py), n=(d>26&&Math.random()<.35)?1:0;
+    for(let i=0;i<n;i++){
+      const f=Math.random();
+      flocons.push({x:mouse.px+(x-mouse.px)*f+(Math.random()-.5)*14,y:mouse.py+(y-mouse.py)*f+(Math.random()-.5)*14,
+        vx:(Math.random()-.5)*.14,vy:.025+Math.random()*.1,r:1.2+Math.random()*4.5,vie:0,dur:3200+Math.random()*3200,
+        c:cols[Math.floor(Math.random()*cols.length)],ph:Math.random()*6.28});
+    }
+    if(flocons.length>240)flocons.splice(0,flocons.length-240);
+    mouse.px=x;mouse.py=y;
+  }
+  addEventListener('pointermove',e=>bouge(e.clientX,e.clientY),{passive:true});
+  addEventListener('touchmove',e=>{const t=e.touches[0];if(t)bouge(t.clientX,t.clientY)},{passive:true});
+  let last=performance.now();
+  function halo(x,y,r,c,a){
+    const g=cx.createRadialGradient(x,y,0,x,y,r);
+    g.addColorStop(0,'rgba('+c+','+a+')');g.addColorStop(.35,'rgba('+c+','+(a*.38)+')');g.addColorStop(1,'rgba('+c+',0)');
+    cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,6.28);cx.fill();
+  }
+  function frame(now){
+    last=now;cx.clearRect(0,0,W,H);cx.globalCompositeOperation='lighter';
+    for(let i=flocons.length-1;i>=0;i--){
+      const b=flocons[i];b.vie+=16;
+      if(b.vie>=b.dur){flocons.splice(i,1);continue}
+      b.x+=b.vx+Math.sin(now/900+b.ph)*.22;b.y+=b.vy;
+      const u=b.vie/b.dur,a=(1-u)*(u<.15?u/.15:1);
+      halo(b.x,b.y,b.r*3.2,b.c,a*.55);
+    }
+    const visible=mouse.actif&&(now-mouse.t<4000);
+    for(const f of suiv){
+      f.ang+=.005+f.k*.12;
+      const tx=mouse.x+Math.cos(f.ang+f.ph)*f.rayon,ty=mouse.y+Math.sin(f.ang*1.3+f.ph)*f.rayon*.8;
+      f.x+=(tx-f.x)*f.k;f.y+=(ty-f.y)*f.k;
+      if(!visible)continue;
+      halo(f.x,f.y,f.r*6,f.c,.55*(.65+.35*Math.sin(now/700+f.ph*3)));
+    }
+    cx.globalCompositeOperation='source-over';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// Réseaux et plateformes : remplis les adresses, les liens vides n'apparaissent pas
+(function(){
+  const LIENS=[
+    ["Instagram","https://www.instagram.com/ladylikelily/"],   // à vérifier
+    ["Spotify",""],
+    ["Deezer",""],
+    ["Bandcamp","https://ladylikelilymusic.bandcamp.com"],
+    ["SoundCloud",""],
+    ["Instagram OUCH PROD","https://instagram.com/ouch.prod"],
+    ["Facebook","https://facebook.com/ouchprodasso"]
+  ];
+  document.getElementById('reseaux').innerHTML=LIENS.filter(l=>l[1]).map(l=>'<a href="'+l[1]+'" target="_blank" rel="noopener">'+l[0]+'</a>').join('');
+})();
+
+// Navigation
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('fond',scrollY>60),{passive:true});
+document.getElementById('burger').onclick=()=>document.getElementById('menu').classList.toggle('ouvert');
+document.querySelectorAll('#menu a').forEach(a=>a.onclick=()=>document.getElementById('menu').classList.remove('ouvert'));
+
+// Apparition au défilement
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// Lightbox
+const lb=document.getElementById('lightbox'),lbi=lb.querySelector('img');
+document.querySelectorAll('.galerie img, #refuges').forEach(i=>i.onclick=()=>{lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+
+// Neige bleue douce (hero) : halos en camaïeu de bleus, qui tombent lentement
+(function(){
+  const cv=document.getElementById('points'),ctx=cv.getContext('2d');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let W,H,fl=[];
+  const cols=[[205,232,255],[140,200,255],[90,165,245],[60,125,225],[100,210,235]];
+  function init(){
+    W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;
+    fl=Array.from({length:Math.round(W*H/52000)},()=>({x:Math.random()*W,y:Math.random()*H,r:1.2+Math.pow(Math.random(),2.2)*10,v:.035+Math.random()*.11,p:Math.random()*6.28,c:cols[Math.floor(Math.random()*cols.length)],o:.14+Math.random()*.3}));
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    for(const p of fl){
+      p.y+=p.v;p.x+=Math.sin(t/5200+p.p)*.12;
+      if(p.y>H+20){p.y=-20;p.x=Math.random()*W}
+      const a=p.o*(.7+.3*Math.sin(t/1800+p.p));
+      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.6);
+      g.addColorStop(0,'rgba('+p.c+','+a+')');g.addColorStop(.4,'rgba('+p.c+','+(a*.35)+')');g.addColorStop(1,'rgba('+p.c+',0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*2.6,0,6.28);ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  init();addEventListener('resize',init);requestAnimationFrame(draw);
+})();
+
+(function(){const h=document.querySelector('.hero');if(!h||!('IntersectionObserver' in window))return;
+new IntersectionObserver(e=>{const st=e[0].isIntersecting?'running':'paused';h.querySelectorAll('.bg').forEach(b=>b.style.animationPlayState=st)}).observe(h)})();
+</script>
+</body>
+</html>
