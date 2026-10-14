@@ -87,6 +87,16 @@ nav.fond{background:rgba(4,12,26,.86);backdrop-filter:blur(10px);border-bottom:1
 nav{opacity:0;transition:opacity 2s ease,background .3s}
 body:not(.intro) nav{opacity:1}
 body.intro{overflow:hidden}
+#sonBtn{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:400;width:38px;height:38px;border-radius:50%;border:1px solid rgba(160,220,240,.3);background:rgba(2,8,20,.3);color:#d8f0fa;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity 1.8s ease,border-color .4s;padding:0;-webkit-tap-highlight-color:transparent}
+#sonBtn.vu{opacity:.7;pointer-events:auto;animation:souffle 3.6s ease-in-out infinite}
+#sonBtn.bas{top:calc(100% - 2rem);width:32px;height:32px;animation:none}
+#sonBtn.bas.vu{opacity:.34}
+#sonBtn.glisse{transition:opacity 1.8s ease,top 2.2s cubic-bezier(.45,.05,.25,1),border-color .4s}
+#sonBtn.vu:hover,#sonBtn.vu:focus-visible{opacity:.92;border-color:rgba(160,220,240,.65)}
+#sonBtn.on{opacity:.85}#sonBtn.bas.on{opacity:.7}
+@keyframes souffle{0%,100%{box-shadow:0 0 0 0 rgba(150,215,245,.0)}50%{box-shadow:0 0 22px 6px rgba(150,215,245,.22)}}
+#sonBtn svg{width:16px;height:16px}
+#sonBtn .ondes{display:none}#sonBtn.on .ondes{display:inline}#sonBtn.on .coupe{display:none}
 #lucioles{position:fixed;inset:0;width:100%;height:100%;z-index:300;pointer-events:none}
 
 /* PITCH */
@@ -213,7 +223,7 @@ footer a{color:var(--glace)}
   <ul class="menu" id="menu">
     <li><a href="#spectacle">Le spectacle</a></li>
     <li><a href="#axes">Les trois axes</a></li>
-    <li><a href="#univers">Univers</a></li>
+    <li><a href="#univers">Recherches</a></li>
     <li><a href="#teaser">Teaser</a></li>
     <li><a href="#son">Son</a></li>
     <li><a href="#equipe">Équipe</a></li>
@@ -287,7 +297,7 @@ footer a{color:var(--glace)}
 <section id="univers" class="alt">
   <div class="wrap">
     <p class="eyebrow rv">Univers visuel</p>
-    <h2 class="rv">Portraits, fonds et décors</h2>
+    <h2 class="rv">Recherches au plateau</h2>
     <p class="lead rv" style="max-width:640px">Une citadelle de papier, des ombres, des fonds de lumière : le monde intérieur de Lily se construit sous les yeux du public, du bleu saturé du début vers un monde de couleurs.</p>
     <div class="galerie" id="galerie">
       <figure class="rv"><img src="img/portrait.jpg" alt="Portrait de Ladylike Lily dans la projection" loading="lazy"><figcaption>Ladylike Lily · portrait officiel</figcaption></figure>
@@ -466,6 +476,7 @@ footer a{color:var(--glace)}
   </div>
 </footer>
 
+<button id="sonBtn" type="button" aria-label="Activer l’ambiance sonore" title="Ambiance sonore" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor" stroke="none"/><g class="ondes"><path d="M15.2 9a4.2 4.2 0 0 1 0 6"/><path d="M17.8 6.5a7.6 7.6 0 0 1 0 11"/></g><path class="coupe" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
 <canvas id="lucioles" aria-hidden="true"></canvas>
 <div id="lightbox"><img alt=""></div>
 
@@ -478,8 +489,12 @@ const TEASER = "https://www.youtube.com/embed/dzT9AUN7tzw";
 
 /* SON : ajoute tes extraits (fichiers mp3 posés dans le même dossier que ce fichier). */
 const PISTES = [
-  /* { titre:"Brouillard", note:"Extrait de la création en cours · automne 2026", src:"son/brouillard.mp3" }, */
+  { titre:"Extrait sonore", note:"Création en cours · automne 2026 · 0:47", src:"extrait-sonore.mp3" },
+  { titre:"Cours de récré", note:"Création en cours · automne 2026 · 1:16", src:"cours-de-recre.mp3" },
+  { titre:"Papillon de nuit", note:"Création en cours · automne 2026 · 2:18", src:"papillon-de-nuit.mp3" },
+  { titre:"Texture de nuage", note:"Ambiance · création en cours · automne 2026 · 0:50", src:"texture-de-nuage.mp3" },
 ];
+const BOUCLE = "intro-boucle.mp3";   // ambiance d'ouverture (vide = pas de bouton son)
 /* ─────────────────────── */
 
 // Teaser
@@ -502,6 +517,34 @@ const PISTES = [
     return;
   }
   box.innerHTML=PISTES.map(p=>'<div class="piste"><h3>'+p.titre+'<small>'+(p.note||'')+'</small></h3><audio controls preload="none" src="'+p.src+'"></audio></div>').join('');
+})();
+
+// Ambiance sonore d'ouverture (démarre seulement au clic sur l'icône, discrète en bas à gauche)
+(function(){
+  const b=document.getElementById('sonBtn');
+  if(!b)return;
+  if(typeof BOUCLE==='undefined'||!BOUCLE){b.remove();return;}
+  const a=new Audio(BOUCLE);a.loop=true;a.preload='none';a.volume=0;
+  const VOL=.45;let fade=null;
+  function vers(v,fin){clearInterval(fade);fade=setInterval(()=>{const d=v-a.volume;if(Math.abs(d)<.03){a.volume=v;clearInterval(fade);fin&&fin();}else a.volume=Math.max(0,Math.min(1,a.volume+Math.sign(d)*.03));},70);}
+  function marche(){a.play().then(()=>{b.classList.add('on');b.setAttribute('aria-pressed','true');b.setAttribute('aria-label','Couper l’ambiance sonore');vers(VOL);}).catch(()=>{});}
+  function arret(){b.classList.remove('on');b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Activer l’ambiance sonore');vers(0,()=>a.pause());}
+  let touche=false;
+  // au départ : en plein centre de l'image, on peut lancer le son tout de suite ; si personne n'y touche, il s'efface comme la neige puis se pose discrètement en bas
+  setTimeout(()=>{if(!touche)b.classList.add('vu')},900);
+  setTimeout(()=>{
+    if(touche)return;
+    b.classList.remove('vu');
+    setTimeout(()=>{b.classList.add('bas');setTimeout(()=>{b.classList.add('vu')},60)},2000);
+  },11000);
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(!touche&&!b.classList.contains('bas')){touche=true;b.classList.add('glisse');setTimeout(()=>{b.classList.add('bas')},1200);}
+    touche=true;b.classList.add('vu');
+    b.classList.contains('on')?arret():marche();
+  });
+  // si on lance un extrait, l'ambiance s'efface
+  document.addEventListener('play',e=>{if(e.target!==a&&b.classList.contains('on'))arret();},true);
 })();
 
 // Fiche technique : si le PDF n'existe pas encore, le bouton mène à la section contact
@@ -581,17 +624,18 @@ const PISTES = [
   const cols=[[205,232,255],[130,195,255],[80,160,245],[60,120,225],[90,205,235],[170,215,255]];
   const mouse={x:W/2,y:H/2,px:W/2,py:H/2,actif:false,t:0};
   const flocons=[];
-  const suiv=Array.from({length:4},(_,i)=>({x:W/2,y:H/2,k:.014+i*.008,ph:Math.random()*6.28,r:2.4+Math.random()*2.4,c:cols[i%cols.length],ang:Math.random()*6.28,rayon:14+Math.random()*38}));
+  const TAILLES=[1.4,2.2,3.2,4.4,5.8,1.8,2.8,4,7,2.6,3.6,8.5];
+  const suiv=TAILLES.map((r,i)=>({x:W/2,y:H/2,k:.0035+Math.random()*.0075,ph:Math.random()*6.28,r:r,c:cols[i%cols.length],ang:Math.random()*6.28,rayon:16+Math.random()*80}));
   function bouge(x,y){
     mouse.x=x;mouse.y=y;mouse.actif=true;mouse.t=performance.now();
-    const d=Math.hypot(x-mouse.px,y-mouse.py), n=(d>26&&Math.random()<.35)?1:0;
+    const d=Math.hypot(x-mouse.px,y-mouse.py), n=(d>24&&Math.random()<.42)?1:0;
     for(let i=0;i<n;i++){
       const f=Math.random();
       flocons.push({x:mouse.px+(x-mouse.px)*f+(Math.random()-.5)*14,y:mouse.py+(y-mouse.py)*f+(Math.random()-.5)*14,
-        vx:(Math.random()-.5)*.14,vy:.025+Math.random()*.1,r:1.2+Math.random()*4.5,vie:0,dur:3200+Math.random()*3200,
+        vx:(Math.random()-.5)*.1,vy:.02+Math.random()*.07,r:(Math.random()<.5?1+Math.random()*1.6:(Math.random()<.8?2.6+Math.random()*2.6:5.5+Math.random()*3.5)),vie:0,dur:3200+Math.random()*3200,
         c:cols[Math.floor(Math.random()*cols.length)],ph:Math.random()*6.28});
     }
-    if(flocons.length>240)flocons.splice(0,flocons.length-240);
+    if(flocons.length>300)flocons.splice(0,flocons.length-300);
     mouse.px=x;mouse.py=y;
   }
   addEventListener('pointermove',e=>bouge(e.clientX,e.clientY),{passive:true});
@@ -609,15 +653,15 @@ const PISTES = [
       if(b.vie>=b.dur){flocons.splice(i,1);continue}
       b.x+=b.vx+Math.sin(now/900+b.ph)*.22;b.y+=b.vy;
       const u=b.vie/b.dur,a=(1-u)*(u<.15?u/.15:1);
-      halo(b.x,b.y,b.r*3.2,b.c,a*.55);
+      halo(b.x,b.y,b.r*3.2,b.c,a*.42);
     }
     const visible=mouse.actif&&(now-mouse.t<4000);
     for(const f of suiv){
-      f.ang+=.005+f.k*.12;
+      f.ang+=.0016+f.k*.06;
       const tx=mouse.x+Math.cos(f.ang+f.ph)*f.rayon,ty=mouse.y+Math.sin(f.ang*1.3+f.ph)*f.rayon*.8;
       f.x+=(tx-f.x)*f.k;f.y+=(ty-f.y)*f.k;
       if(!visible)continue;
-      halo(f.x,f.y,f.r*6,f.c,.55*(.65+.35*Math.sin(now/700+f.ph*3)));
+      halo(f.x,f.y,f.r*6,f.c,.38*(.65+.35*Math.sin(now/1300+f.ph*3)));
     }
     cx.globalCompositeOperation='source-over';
     requestAnimationFrame(frame);
